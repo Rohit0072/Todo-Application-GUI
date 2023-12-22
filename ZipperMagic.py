@@ -15,21 +15,25 @@ compress_button = sg.Button("Compress")
 
 output_lable = sg.Text(key="output_lable", text_color="green")
 
+col1 = sg.Column([[lable1], [lable2], [lable3]])
+col2 = sg.Column([[input1], [input2], [op_file_name]])
+col3 = sg.Column([[choose_button1], [choose_button2], [compress_button]])
+
 window = sg.Window("Zipper Magic",
-                   layout=[[lable1, input1, choose_button1],
-                           [lable2, input2, choose_button2],
-                           [lable3, op_file_name,compress_button],
+                   layout=[[col1, col2, col3],
                            [output_lable]])
 while True:
-    event, values = window.read()
-    print(event)
-    print(values)
-    print(op_file_name)
-    filepaths = values["files"].split(";")
-    folder = values["folder"]
-    make_archive(filepaths, folder, values['op_fn'])
+    try:
+        event, values = window.read()
+        filepaths = values["files"].split(";")
+        folder = values["folder"]
+        make_archive(filepaths, folder, values['op_fn'])
 
-    window["output_lable"].update(value="Compression Completed!")
+        window["output_lable"].update(value="Compression Completed!")
+    except AttributeError:
+        break
+    except TypeError:
+        break
 
 window.close()
 
