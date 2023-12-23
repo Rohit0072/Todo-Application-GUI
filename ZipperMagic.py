@@ -1,6 +1,6 @@
 import PySimpleGUI as sg
 from zip_creator import make_archive
-
+tagg = sg.Text("Zippeer", font=("Academy Filled 3D", 24))
 lable1 = sg.Text('Select files to compress:')
 input1 = sg.Input()
 choose_button1 = sg.FilesBrowse("Choose", key="files")
@@ -15,12 +15,12 @@ compress_button = sg.Button("Compress")
 
 output_lable = sg.Text(key="output_lable", text_color="green")
 
-col1 = sg.Column([[lable1], [lable2], [lable3]])
-col2 = sg.Column([[input1], [input2], [op_file_name]])
-col3 = sg.Column([[choose_button1], [choose_button2], [compress_button]])
+
 
 window = sg.Window("Zipper Magic",
-                   layout=[[col1, col2, col3],
+                   layout=[[tagg],[lable1, input1, choose_button1],
+                           [lable2, input2, choose_button2],
+                           [lable3, op_file_name,compress_button],
                            [output_lable]])
 while True:
     try:
